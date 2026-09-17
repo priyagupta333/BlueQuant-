@@ -1,0 +1,21 @@
+## Environment & local DB
+.env
+db.sqlite3
+
+## Python cache/bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+## Virtual environments (optional)
+.venv/
+venv/
+.vscode
+
+## Node modules
+node_modules/
+
+## Hardhat
+contracts/artifacts/
+contracts/cache/
+contracts/deployments/localhost.json
