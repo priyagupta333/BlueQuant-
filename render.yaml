@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: blue-carbon-mrv
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.4"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: blue-carbon-db
+          property: connectionString
+
+databases:
+  - name: blue-carbon-db
+    plan: free
+    databaseName: blue_carbon_mrv
