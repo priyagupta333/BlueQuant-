@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <body style="font-family:Arial,Helvetica,sans-serif;line-height:1.5;color:#111;">
+    <h2>Update: Credits Purchased by Companies — Remaining Balance Available for Sale</h2>
+    <p>Dear {{ ngo_name }} Team,</p>
+    <p>We wish to update you on recent purchases of credits from your project "{{ project_name }}":</p>
+
+    <p>
+      <strong>Total credits issued:</strong> {{ total_issued }}<br/>
+      <strong>Credits purchased by companies:</strong> {{ number_purchased }}<br/>
+      <strong>Remaining balance available for sale:</strong> {{ remaining }}
+    </p>
+
+    <p><strong>Recent purchase transactions:</strong></p>
+    <ul>
+      {% for r in recent %}
+      <li>Transaction ID: {{ r.id }} — Buyer: {{ r.buyer }} — Credits: {{ r.credits }} — Date: {{ r.date }}</li>
+      {% empty %}
+      <li>—</li>
+      {% endfor %}
+    </ul>
+
+    <p>
+      Purchasers: {{ purchasers }}
+    </p>
+
+    <p>
+      You can view full transaction details and download receipts from your dashboard: <a href="{{ dashboard_link }}">{{ dashboard_link }}</a>
+    </p>
+
+    <p>
+      If you would like assistance in listing the remaining credits for sale, setting price guidance, or arranging priority buyers, our team is ready to help. Please reply to this email or contact {{ support_email }}.
+    </p>
+
+    <p>
+      Thank you for partnering with us.
+    </p>
+
+    <p>
+      Warm regards,<br/>
+      {{ sender_name }}<br/>
+      {{ sender_title }}<br/>
+      {{ org_name }}
+    </p>
+
+    <hr/>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+<div style="font-family:system-ui,Segoe UI,Arial,sans-serif">
+  <h2>Proposal Accepted</h2>
+  <p>Your proposal for <strong>{{ tender.tender_title }}</strong> has been accepted.</p>
+  <p>Status: {{ proposal.status }}{% if proposal.chain_tx_hash %} • Tx: {{ proposal.chain_tx_hash }}{% endif %}</p>
+  <p>Thanks,<br/>{{ org }}</p>
+</div>

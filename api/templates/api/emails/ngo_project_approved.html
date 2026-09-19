@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <body style="font-family:Arial,Helvetica,sans-serif;line-height:1.5;color:#111;">
+    <h2>Verification: Project Approved — Credits Issued to Your Wallet</h2>
+    <p>Dear {{ ngo_name }} Team,</p>
+    <p>
+      We are pleased to inform you that your project "{{ project_name }}" has been reviewed and officially approved.
+      As part of this approval, <strong>{{ credits }}</strong> carbon credits have been issued to your wallet:
+    </p>
+    <p>
+      <strong>Wallet ID:</strong> {{ wallet_id }}<br/>
+      <strong>Credits issued:</strong> {{ credits }}<br/>
+      <strong>Issue date:</strong> {{ issue_date }}
+    </p>
+    <p>
+      You can view the transaction and current balance by logging into your account at: <a href="{{ dashboard_link }}">{{ dashboard_link }}</a>
+    </p>
+    <p>
+      If you have any questions or need additional documentation (verification certificate, invoice, or transaction receipt), please reply to this email or contact our support team at {{ support_email }}.
+    </p>
+    <p>
+      Congratulations and thank you for your continued work toward measurable climate impact.
+    </p>
+    <p>
+      Warm regards,<br/>
+      {{ sender_name }}<br/>
+      {{ sender_title }}<br/>
+      {{ org_name }}
+    </p>
+    <hr/>
+  </body>
+</html>

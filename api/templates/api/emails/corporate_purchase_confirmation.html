@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Purchase Confirmation</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: #111827; }
+    .container { max-width: 640px; margin: 0 auto; padding: 24px; }
+    .h1 { font-size: 20px; font-weight: 700; }
+    .muted { color: #6B7280; }
+    .btn { display: inline-block; padding: 10px 16px; background: #111827; color: #fff !important; text-decoration: none; }
+    .card { border: 1px solid #E5E7EB; padding: 16px; margin-top: 16px; }
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="h1">Thank you for your purchase</p>
+    <p>Hello {{ company_name }},</p>
+    <p>You have purchased <strong>{{ credits }} carbon credits</strong> from <strong>{{ ngo_name }}</strong>.</p>
+
+    <div class="card">
+      <div class="row">
+        <div>
+          <div class="muted">Credits</div>
+          <div><strong>{{ credits }}</strong></div>
+        </div>
+        <div>
+          <div class="muted">Date</div>
+          <div><strong>{{ purchase_date }}</strong></div>
+        </div>
+        <div>
+          <div class="muted">Transaction ID</div>
+          <div><strong>{{ transaction_id }}</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <p>You can download your certificate using the button below. A PDF copy may also be attached to this email.</p>
+    <p>
+      <a class="btn" href="{{ dashboard_link }}corporate/dashboard/">Open Dashboard</a>
+    </p>
+
+    <p class="muted">— {{ org_name }}</p>
+  </div>
+</body>
+</html><!DOCTYPE html>
+<html>
+  <body style="font-family:Arial,Helvetica,sans-serif;line-height:1.5;color:#111;">
+    <h2>Purchase Confirmation — Credits Purchased and Issued to Your Wallet</h2>
+    <p>Dear {{ company_name }} Team,</p>
+    <p>
+      Thank you for your purchase. This is a confirmation that <strong>{{ credits }}</strong> carbon credits have been purchased from <strong>{{ ngo_name }}</strong> and issued to your wallet:
+    </p>
+    <p>
+      <strong>Seller:</strong> {{ ngo_name }}<br/>
+      <strong>Buyer:</strong> {{ company_name }}<br/>
+      <strong>Wallet ID:</strong> {{ buyer_wallet_id }}<br/>
+      <strong>Credits purchased &amp; issued:</strong> {{ credits }}<br/>
+      <strong>Transaction ID:</strong> {{ transaction_id }}<br/>
+      <strong>Purchase date:</strong> {{ purchase_date }}
+    </p>
+    <p>
+      A digital invoice and transaction receipt are attached for your records. You can also view the transaction and updated balance on our platform: <a href="{{ dashboard_link }}">{{ dashboard_link }}</a>
+    </p>
+    <p>
+      If you need any further assistance (sourcing certificate, transfer confirmation, or corporate reporting documents), please contact {{ org_name }} support.
+    </p>
+    <p>
+      Thank you for supporting verified climate action.
+    </p>
+    <p>
+      Best regards,<br/>
+      {{ sender_name }}<br/>
+      {{ sender_title }}<br/>
+      {{ org_name }}
+    </p>
+    <hr/>
+  </body>
+</html>
