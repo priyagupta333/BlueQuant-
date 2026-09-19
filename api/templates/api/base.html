@@ -1,0 +1,991 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}BlueQuant{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Jockey+One&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        inter: ['Inter','sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        julius: ['"Julius Sans One"', 'sans-serif'],
+                        jockey: ['"Jockey One"', 'sans-serif'],
+                        javanese: ['"Javanese Text"', 'serif']
+                    },
+                    colors: {
+                        'primary': {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e'
+                        },
+                        'accent': {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d'
+                        },
+                        'neutral': {
+                            50: '#fafafa',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
+                            700: '#404040',
+                            800: '#262626',
+                            900: '#171717'
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(14, 165, 233, 0.3)',
+                        'glow-accent': '0 0 20px rgba(34, 197, 94, 0.3)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            --accent-gradient: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
+            --card-gradient: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%);
+        }
+        
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { transform: scale(1); } 
+            50% { transform: scale(1.05); } 
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes modalFadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.95) translateY(20px);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        @keyframes modalFadeOut {
+            from { 
+                opacity: 1; 
+                transform: scale(1) translateY(0);
+            }
+            to { 
+                opacity: 0; 
+                transform: scale(0.95) translateY(20px);
+            }
+        }
+        
+        @keyframes backdropFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes backdropFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        @keyframes loadingPulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes skeletonShimmer {
+            0% {
+                background-position: -200px 0;
+            }
+            100% {
+                background-position: calc(200px + 100%) 0;
+            }
+        }
+        
+        .modal-backdrop {
+            animation: backdropFadeIn 0.3s ease-out;
+        }
+        
+        .modal-backdrop.closing {
+            animation: backdropFadeOut 0.3s ease-out;
+        }
+        
+        .modal-content {
+            animation: modalFadeIn 0.4s ease-out 0.1s both;
+        }
+        
+        .modal-content.closing {
+            animation: modalFadeOut 0.3s ease-out;
+        }
+        
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200px 100%;
+            animation: skeletonShimmer 1.5s infinite;
+        }
+        
+        .loading-pulse {
+            animation: loadingPulse 2s infinite;
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Shared hero image + glass surfaces (Home/About) */
+        .hero-bg {
+            background-image: url("/static/api/images/bg1.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-bg-fixed {
+            background-attachment: fixed;
+        }
+
+        /* Auth pages background */
+        .auth-bg {
+            background-image: url("/static/api/images/bg2.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .auth-bg-fixed {
+            background-attachment: fixed;
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg-fixed, .auth-bg-fixed {
+                background-attachment: scroll;
+            }
+        }
+
+        .hero-overlay {
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 40%),
+                radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 45%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.55) 100%);
+        }
+
+        .glass-surface {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .glass-surface-strong {
+            background: rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .nav-on-hero {
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-bottom: none;
+            box-shadow: none;
+        }
+
+        .nav-on-hero::before {
+            display: none;
+        }
+
+        .nav-on-hero .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-family: "Javanese Text", serif;
+        }
+
+        .nav-on-hero .nav-link:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .nav-on-hero .brand-text {
+            color: rgba(255, 255, 255, 1);
+            background: none;
+            -webkit-text-fill-color: currentColor;
+            font-family: "Javanese Text", serif;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Mobile-specific modal adjustments */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 95vw;
+                max-height: 95vh;
+                margin: 0.5rem;
+            }
+            
+            .skeleton {
+                animation-duration: 2s;
+            }
+        }
+        
+        /* Touch-friendly interactions */
+        @media (hover: none) and (pointer: coarse) {
+            .card-hover:hover {
+                transform: none;
+            }
+            
+            .card-hover:active {
+                transform: translateY(-1px);
+                transition-duration: 0.1s;
+            }
+        }
+        
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .modal-content,
+            .modal-backdrop,
+            .skeleton,
+            .loading-pulse,
+            .card-hover {
+                animation: none;
+                transition: none;
+            }
+        }
+        
+        .nav-shimmer {
+            position: relative;
+            /* Allow dropdown menus to extend outside the header */
+            overflow: visible;
+        }
+        
+        .nav-shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .modern-nav {
+            background: linear-gradient(135deg, 
+                rgba(14, 165, 233, 0.15) 0%, 
+                rgba(59, 130, 246, 0.1) 25%,
+                rgba(99, 102, 241, 0.08) 50%,
+                rgba(139, 92, 246, 0.1) 75%,
+                rgba(14, 165, 233, 0.12) 100%
+            );
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+            box-shadow: 
+                0 8px 32px rgba(14, 165, 233, 0.12),
+                0 4px 16px rgba(59, 130, 246, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+        
+        .modern-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(14, 165, 233, 0.05) 100%
+            );
+            pointer-events: none;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            border-radius: 0;
+            backdrop-filter: none;
+            padding: 8px 16px;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, 
+                rgba(14, 165, 233, 0.9) 0%, 
+                rgba(59, 130, 246, 0.8) 50%,
+                rgba(99, 102, 241, 0.9) 100%
+            );
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(14, 165, 233, 0.1) 0%, 
+                rgba(59, 130, 246, 0.05) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            width: 100%;
+        }
+        
+        .nav-link:hover::after {
+            opacity: 1;
+        }
+        
+        .nav-link:hover {
+            color: #0ea5e9;
+            transform: translateY(-1px);
+            box-shadow: none;
+        }
+        
+        .modern-card {
+            background: var(--card-gradient);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .modern-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-hover);
+            border-color: rgba(14, 165, 233, 0.2);
+        }
+        
+        .btn-primary {
+            background: var(--primary-gradient);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-primary:hover::before {
+            left: 0;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+        
+        .page-enter {
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-enter {
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .message-enter {
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu-slide {
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu-slide.active {
+            transform: translateX(0);
+        }
+        
+        .geometric-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        /* Enhanced Login Page Styles */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(14, 165, 233, 0.5), 0 0 60px rgba(14, 165, 233, 0.2); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .login-card-hover {
+            animation: glow-pulse 4s ease-in-out infinite;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .input-focus-glow:focus {
+            box-shadow: 
+                0 0 0 4px rgba(14, 165, 233, 0.1),
+                0 4px 20px rgba(14, 165, 233, 0.2);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #3b82f6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .role-icon-bounce {
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+            40%, 43% { transform: translate3d(0,-15px,0); }
+            70% { transform: translate3d(0,-5px,0); }
+            90% { transform: translate3d(0,-2px,0); }
+        }
+    </style>
+</head>
+<body class="font-inter bg-white geometric-bg relative min-h-screen page-enter">
+    <!-- Header -->
+    <header class="{% block header_classes %}nav-on-hero nav-shimmer sticky top-0 z-40{% endblock %}">
+        <div class="w-full px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 overflow-visible">
+                <a href="{% url 'home' %}" class="flex items-center group">
+                    <div class="relative">
+                        <img src="{% static 'api/images/logo.png' %}" alt="BlueQuant Logo" class="w-12 h-12 object-contain">
+                    </div>
+                    <span class="ml-3 text-2xl font-bold text-white font-javanese brand-text">BlueQuant</span>
+                </a>
+                <nav class="hidden lg:block overflow-visible">
+                    <div class="flex space-x-1">
+                        <a href="{% url 'home' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">Home</a>
+                        <a href="{% url 'about' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">About Us</a>
+                        {% if user.is_authenticated %}
+                            {% if user.profile.role == 'ngo' %}
+                                <a href="{% url 'ngo_dashboard' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">Contributor Dashboard</a>
+                            {% elif user.profile.role == 'corporate' %}
+                                <a href="{% url 'corporate_dashboard' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">Corporate Dashboard</a>
+                            {% elif user.profile.role == 'admin' %}
+                                <a href="{% url 'admin_dashboard' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">Admin Dashboard</a>
+                            {% elif user.profile.role == 'field_officer' %}
+                                <a href="{% url 'field_officer_dashboard' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">Field Officer Dashboard</a>
+                            {% elif user.profile.role == 'isro_admin' %}
+                                <a href="{% url 'isro_admin_dashboard' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">ISRO Dashboard</a>
+                            {% endif %}
+                            <a href="{% url 'logout' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">Logout</a>
+                        {% else %}
+                            <div class="relative group" x-data="{ open:false }">
+                                <button id="signinDropdownBtn" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10 inline-flex items-center gap-1">
+                                    <span>Sign In</span>
+                                    <svg class="w-4 h-4 transition-transform duration-200" id="signinDropdownCaret" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </button>
+                                <div id="signinDropdown" class="hidden absolute right-0 top-full mt-2 w-56 bg-white/95 backdrop-blur-lg border border-neutral-200 rounded-lg shadow-card overflow-hidden z-50">
+                                    <a href="{% url 'login_contributor' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-700">Contributor</a>
+                                    <a href="{% url 'login_corporate' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-700">Corporate</a>
+                                    <a href="{% url 'login_admin' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-700">Admin</a>
+                                    <a href="{% url 'login_field_officer' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-700">Field Officer</a>
+                                    <a href="{% url 'login_isro_admin' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-primary-50 hover:text-primary-700">ISRO Admin</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <a href="{% url 'collaboration_hub' %}" class="nav-link px-4 py-2 text-sm font-medium text-neutral-700 hover:text-white relative z-10">Collaboration</a>
+                    </div>
+                </nav>
+                <button id="mobile-menu-button" class="lg:hidden p-2 text-white hover:text-sky-300 transition-all duration-300 hover:bg-white/10 rounded-lg backdrop-blur-sm border border-transparent hover:border-white/20" aria-label="Toggle navigation">
+                    <svg class="h-6 w-6 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu-slide lg:hidden overflow-hidden">
+            <div class="bg-slate-900/95 backdrop-blur-xl border-t border-white/10 shadow-lg">
+                <div class="px-6 py-4 space-y-2">
+                    <a href="{% url 'home' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">Home</a>
+                    <a href="{% url 'about' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">About Us</a>
+                    {% if user.is_authenticated %}
+                        {% if user.profile.role == 'ngo' %}
+                            <a href="{% url 'ngo_dashboard' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">NGO Dashboard</a>
+                        {% elif user.profile.role == 'contributor' %}
+                                <a href="{% url 'contributor_dashboard' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">Contributor Dashboard</a>
+                        {% elif user.profile.role == 'corporate' %}
+                            <a href="{% url 'corporate_dashboard' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">Corporate Dashboard</a>
+                        {% elif user.profile.role == 'admin' %}
+                            <a href="{% url 'admin_dashboard' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">Admin Dashboard</a>
+                        {% elif user.profile.role == 'field_officer' %}
+                            <a href="{% url 'field_officer_dashboard' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">Field Officer Dashboard</a>
+                        {% elif user.profile.role == 'isro_admin' %}
+                            <a href="{% url 'isro_admin_dashboard' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">ISRO Dashboard</a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">Logout</a>
+                    {% else %}
+                        <details id="mobileSignIn" class="px-2">
+                            <summary class="list-none px-2 py-2 text-sm font-medium text-gray-200 hover:text-white cursor-pointer select-none rounded hover:bg-white/10">Sign In</summary>
+                            <div class="mt-1 ml-2 space-y-1">
+                                <a href="{% url 'login_contributor' %}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded">Contributor</a>
+                                <a href="{% url 'login_corporate' %}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded">Corporate</a>
+                                <a href="{% url 'login_admin' %}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded">Admin</a>
+                                <a href="{% url 'login_field_officer' %}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded">Field Officer</a>
+                                <a href="{% url 'login_isro_admin' %}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded">ISRO Admin</a>
+                            </div>
+                        </details>
+                    {% endif %}
+                    <a href="{% url 'collaboration_hub' %}" class="block px-4 py-3 text-sm font-medium text-gray-200 hover:text-white hover:bg-white/10 transition-all duration-300 border-b border-transparent hover:border-white/20 rounded-lg">Collaboration</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="min-h-screen relative z-10">
+        {% if messages %}
+        <div class="max-w-7xl mx-auto px-6 pt-6">
+            {% for message in messages %}
+                <div class="message-enter mb-4 px-6 py-4 bg-white border border-primary-200 text-primary-800 shadow-sm">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-20 bg-neutral-900 text-neutral-100 pt-16 pb-8 mt-20 overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary-500 to-transparent"></div>
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <img src="{% static 'api/images/logo.png' %}" alt="BlueQuant Logo" class="w-10 h-10 object-contain">
+                        <span class="ml-3 text-xl font-bold">BlueQuant</span>
+                    </div>
+                    <p class="text-neutral-400 max-w-md leading-relaxed mb-6">Empowering coastal communities to protect and restore mangrove ecosystems while earning verified carbon credits.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-neutral-100 mb-4 text-sm uppercase tracking-wide">Platform</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400">
+                        <li><a href="{% url 'ngo_dashboard' %}" class="hover:text-primary-400 transition-colors">Contributor Portal</a></li>
+                        <li><a href="{% url 'admin_dashboard' %}" class="hover:text-primary-400 transition-colors">Admin Panel</a></li>
+                        <li><a href="{% url 'corporate_dashboard' %}" class="hover:text-primary-400 transition-colors">Corporate Dashboard</a></li>
+                        <li><a href="{% url 'home' %}#marketplace" class="hover:text-primary-400 transition-colors">Marketplace</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-neutral-100 mb-4 text-sm uppercase tracking-wide">Contact</h4>
+                    <ul class="space-y-2 text-sm text-neutral-400">
+                        <li>info@bluecarbonmrv.org</li>
+                        <li>+91 9999999999</li>
+                        <li>Mumbai, India</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-6 border-t border-neutral-800 text-center text-neutral-500 text-sm">
+                <p>&copy; 2025 BlueQuant Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+
+    <!-- Enhanced Modal for Project Details -->
+    <div id="ajax-modal-backdrop" class="modal-backdrop hidden fixed inset-0 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-slate-900/80 backdrop-blur-md flex items-center justify-center z-[100] p-4 transition-all duration-500 ease-out">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/5 to-blue-600/10 animate-pulse"></div>
+        <div id="ajax-modal-content" class="modal-content relative mx-auto w-full max-w-7xl max-h-[95vh] overflow-hidden transition-all duration-500 ease-out transform opacity-0 scale-95"></div>
+    </div>
+
+    <script>
+        // Mobile nav toggling
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            if (btn) btn.addEventListener('click', () => { 
+                menu.classList.toggle('active'); 
+                menuIcon.classList.toggle('hidden'); 
+                closeIcon.classList.toggle('hidden'); 
+            });
+
+            // Desktop Sign In dropdown toggling
+            const signinBtn = document.getElementById('signinDropdownBtn');
+            const signinMenu = document.getElementById('signinDropdown');
+            const signinCaret = document.getElementById('signinDropdownCaret');
+            if (signinCaret) signinCaret.classList.add('transform');
+
+            function closeSigninMenu(){
+                if (!signinMenu) return;
+                signinMenu.classList.add('hidden');
+                signinMenu.style.display = 'none';
+                if (signinBtn) signinBtn.setAttribute('aria-expanded', 'false');
+                if (signinCaret) signinCaret.classList.remove('rotate-180');
+            }
+
+            function toggleSigninMenu(){
+                if (!signinMenu) return;
+                const isHidden = signinMenu.classList.contains('hidden');
+                if (isHidden){
+                    signinMenu.classList.remove('hidden');
+                    signinMenu.style.display = 'block';
+                    if (signinBtn) signinBtn.setAttribute('aria-expanded', 'true');
+                    if (signinCaret) signinCaret.classList.add('rotate-180');
+                } else {
+                    closeSigninMenu();
+                }
+            }
+
+            if (signinBtn) {
+                signinBtn.setAttribute('aria-haspopup', 'true');
+                signinBtn.setAttribute('aria-expanded', 'false');
+                signinBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleSigninMenu(); });
+            }
+
+            // Close on outside click
+            document.addEventListener('click', (e) => {
+                if (!signinMenu || signinMenu.classList.contains('hidden')) return;
+                const withinMenu = signinMenu.contains(e.target);
+                const withinBtn = signinBtn && signinBtn.contains(e.target);
+                if (!withinMenu && !withinBtn) closeSigninMenu();
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeSigninMenu();
+            });
+        });
+
+        // Fetch and display project modal
+    let _modalPrevOverflow = null;
+        async function showProjectModal(projectId) {
+            const url = `/project/${projectId}/detail/`;
+            const backdrop = document.getElementById('ajax-modal-backdrop');
+            const content = document.getElementById('ajax-modal-content');
+            // Open modal immediately with enhanced loading state
+            backdrop.classList.remove('hidden');
+            content.innerHTML = `
+                <div class="relative overflow-hidden bg-black/60 backdrop-blur-xl shadow-2xl rounded-sm border border-neutral-800 max-h-[90vh] overflow-y-auto">
+                    <!-- Loading Header -->
+                    <div class="px-8 pt-8 pb-6 bg-neutral-900/50 text-white relative overflow-hidden border-b border-neutral-800">
+                        <div class="absolute inset-0 bg-neutral-900/20"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-4 mb-3">
+                                        <div class="skeleton h-8 w-64 rounded-sm bg-neutral-800"></div>
+                                        <div class="skeleton h-8 w-24 rounded-sm bg-neutral-800"></div>
+                                    </div>
+                                    <div class="skeleton h-4 w-48 rounded-sm bg-neutral-800 mb-2"></div>
+                                    <div class="skeleton h-4 w-32 rounded-sm bg-neutral-800"></div>
+                                </div>
+                                <div class="ml-4 p-2 hover:bg-neutral-800 rounded-sm transition-colors cursor-pointer" onclick="closeProjectModal()">
+                                    <svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-3">
+                                <div class="skeleton h-8 w-40 rounded-sm bg-neutral-800"></div>
+                                <div class="skeleton h-8 w-32 rounded-sm bg-neutral-800"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loading Content -->
+                    <div class="p-8 bg-black/60 backdrop-blur-sm space-y-8">
+                        <div class="grid xl:grid-cols-3 gap-8">
+                            <!-- Main Content Skeleton -->
+                            <div class="xl:col-span-2 space-y-8">
+                                <div class="bg-neutral-900/50 border border-neutral-800 p-8 rounded-sm backdrop-blur-sm shadow-xl">
+                                    <div class="flex items-center gap-3 mb-6">
+                                        <div class="w-10 h-10 bg-neutral-800 rounded-sm skeleton"></div>
+                                        <div class="skeleton h-6 w-32 rounded-sm bg-neutral-800"></div>
+                                    </div>
+                                    <div class="skeleton h-3 w-full rounded-sm bg-neutral-800 mb-4"></div>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div class="bg-black/40 p-4 rounded-sm border border-neutral-800">
+                                            <div class="skeleton h-4 w-16 rounded-sm mb-2 bg-neutral-800"></div>
+                                            <div class="skeleton h-5 w-24 rounded-sm bg-neutral-700"></div>
+                                        </div>
+                                        <div class="bg-black/40 p-4 rounded-sm border border-neutral-800">
+                                            <div class="skeleton h-4 w-16 rounded-sm mb-2 bg-neutral-800"></div>
+                                            <div class="skeleton h-5 w-20 rounded-sm bg-neutral-700"></div>
+                                        </div>
+                                        <div class="bg-black/40 p-4 rounded-sm border border-neutral-800">
+                                            <div class="skeleton h-4 w-24 rounded-sm mb-2 bg-neutral-800"></div>
+                                            <div class="skeleton h-8 w-16 rounded-sm bg-neutral-700"></div>
+                                        </div>
+                                        <div class="bg-black/40 p-4 rounded-sm border border-neutral-800">
+                                            <div class="skeleton h-4 w-20 rounded-sm mb-2 bg-neutral-800"></div>
+                                            <div class="skeleton h-5 w-28 rounded-sm bg-neutral-700"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sidebar Skeleton -->
+                            <div class="space-y-6">
+                                <div class="bg-neutral-900/50 border border-neutral-800 p-8 rounded-sm backdrop-blur-sm shadow-xl">
+                                    <div class="flex items-center gap-3 mb-6">
+                                        <div class="w-10 h-10 bg-neutral-800 rounded-sm skeleton"></div>
+                                        <div class="skeleton h-6 w-32 rounded-sm bg-neutral-800"></div>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="flex justify-between items-center py-3 border-b border-neutral-800">
+                                            <div class="skeleton h-4 w-20 rounded-sm bg-neutral-800"></div>
+                                            <div class="skeleton h-6 w-16 rounded-sm bg-neutral-800"></div>
+                                        </div>
+                                        <div class="flex justify-between items-center py-3 border-b border-neutral-800">
+                                            <div class="skeleton h-4 w-24 rounded-sm bg-neutral-800"></div>
+                                            <div class="skeleton h-6 w-20 rounded-sm bg-neutral-800"></div>
+                                        </div>
+                                        <div class="flex justify-between items-center py-3 border-b border-neutral-800">
+                                            <div class="skeleton h-4 w-16 rounded-sm bg-neutral-800"></div>
+                                            <div class="skeleton h-6 w-18 rounded-sm bg-neutral-800"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loading Footer -->
+                    <div class="px-8 pb-8 flex items-center justify-end bg-neutral-900/50 border-t border-neutral-800 pt-4">
+                        <div class="skeleton h-12 w-32 rounded-sm bg-neutral-800"></div>
+                    </div>
+                </div>`;
+            // lock background scroll
+            if(_modalPrevOverflow === null){ _modalPrevOverflow = document.body.style.overflow || ''; }
+            document.body.style.overflow = 'hidden';
+            // Escape key support
+            document.addEventListener('keydown', _modalEscHandler);
+
+            try {
+                const res = await fetch(url, { credentials: 'same-origin' });
+                if (!res.ok) {
+                    const msg = `Failed to load (status ${res.status})`;
+                    throw new Error(msg);
+                }
+                const html = await res.text();
+                content.innerHTML = html;
+                
+                // Trigger animation for content
+                setTimeout(() => {
+                    content.style.opacity = '1';
+                    content.style.transform = 'scale(1)';
+                }, 50);
+                
+                const closeBtn = document.getElementById('modal-close-btn');
+                if (closeBtn) closeBtn.addEventListener('click', closeProjectModal);
+                const bottomCloseBtn = document.getElementById('modal-close-btn-bottom');
+                if (bottomCloseBtn) bottomCloseBtn.addEventListener('click', closeProjectModal);
+            } catch (e) {
+                // Show enhanced inline error but keep modal open for visibility and debugging
+                const msg = (e && e.message) ? e.message : String(e || 'Unknown error');
+                content.innerHTML = `
+                    <div class="relative overflow-hidden bg-white rounded-3xl shadow-2xl border border-red-200/50 max-h-[90vh]">
+                        <!-- Error Header -->
+                        <div class="px-8 pt-8 pb-6 bg-gradient-to-br from-red-600 via-red-500 to-red-600 text-white relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-r from-red-700/20 via-red-500/10 to-red-700/20"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M4.93 4.93l14.14 14.14M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-2xl font-bold text-white mb-1">Unable to Load Project</h3>
+                                            <p class="text-red-100 text-sm">Something went wrong while fetching the project details</p>
+                                        </div>
+                                    </div>
+                                    <button class="ml-4 p-2 hover:bg-white/10 rounded-full transition-colors" onclick="closeProjectModal()">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Error Content -->
+                        <div class="p-8 bg-gradient-to-br from-red-50/50 to-white">
+                            <div class="bg-white border border-red-200/50 p-8 rounded-2xl shadow-lg">
+                                <div class="text-center mb-8">
+                                    <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <svg class="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <h4 class="text-xl font-bold text-red-900 mb-3">Failed to Load Project Details</h4>
+                                    <p class="text-red-700 mb-6 max-w-md mx-auto">We encountered an error while trying to fetch the project information. Please try again or contact support if the problem persists.</p>
+                                </div>
+                                
+                                <div class="bg-red-50/50 border border-red-200/50 p-6 rounded-xl mb-8">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-red-900 mb-1">Error Details</p>
+                                            <p class="text-sm text-red-800 font-mono bg-red-100/50 px-3 py-2 rounded border border-red-200/30">${msg}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-center gap-4">
+                                    <button class="group inline-flex items-center gap-3 bg-gradient-to-r from-slate-200 to-slate-300 hover:from-slate-300 hover:to-slate-400 text-slate-700 font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl" onclick="closeProjectModal()">
+                                        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                        Close
+                                    </button>
+                                    <button class="group inline-flex items-center gap-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl" onclick="showProjectModal('${projectId}')">
+                                        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                        </svg>
+                                        Retry
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+        }
+    function _modalEscHandler(ev){ if(ev.key === 'Escape'){ closeProjectModal(); } }
+        function closeProjectModal(){
+            const backdrop = document.getElementById('ajax-modal-backdrop');
+            const content = document.getElementById('ajax-modal-content');
+            
+            // Add closing animations
+            backdrop.classList.add('closing');
+            content.classList.add('closing');
+            
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                backdrop.classList.add('hidden');
+                backdrop.classList.remove('closing');
+                content.classList.remove('closing');
+                content.innerHTML = '';
+                
+                // restore scroll
+                if(_modalPrevOverflow !== null){ 
+                    document.body.style.overflow = _modalPrevOverflow; 
+                    _modalPrevOverflow = null; 
+                }
+                document.removeEventListener('keydown', _modalEscHandler);
+            }, 300);
+        }
+        document.addEventListener('click', (e) => {
+            const backdrop = document.getElementById('ajax-modal-backdrop');
+            if (e.target === backdrop) closeProjectModal();
+        });
+    </script>
+</body>
+</html>
