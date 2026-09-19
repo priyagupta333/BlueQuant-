@@ -1,0 +1,332 @@
+{% extends 'api/base.html' %}
+
+{% block title %}About Us - BlueQuant{% endblock %}
+
+{% block header_classes %}nav-on-hero nav-shimmer sticky top-0 z-40{% endblock %}
+
+{% block content %}
+<div class="relative font-javanese">
+    <div class="fixed inset-0 hero-bg hero-bg-fixed"></div>
+    <div class="fixed inset-0 hero-overlay"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-16">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center justify-center w-20 h-20 glass-surface-strong rounded-full shadow-glow mb-8">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-julius text-white mb-6 tracking-[0.18em] uppercase">
+                About BlueQuant
+            </h1>
+            <p class="text-xl md:text-2xl text-white/85 max-w-4xl mx-auto leading-relaxed font-javanese">
+                "Building Trust in Carbon Markets, One Credit at a Time."
+            </p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Main Content -->
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Who We Are -->
+                <div class="glass-surface-strong rounded-3xl p-8">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-sky-500 to-blue-600 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        Who We Are
+                    </h2>
+                    <div class="prose prose-lg text-white/85 leading-relaxed">
+                        <p>At BlueQuant, we are on a mission to make carbon markets transparent, trustworthy, and impactful. We understand that the fight against climate change requires collaboration between local communities, NGOs, administrators, and corporations. But the challenge has always been the same: <strong>trust</strong>.</p>
+                        
+                        <p>How can businesses be sure that the carbon credits they buy represent real climate impact? How can communities ensure that their efforts are recognized, valued, and rewarded?</p>
+                        
+                        <p><strong>That's where we come in.</strong></p>
+                        
+                        <p>BlueQuant is more than just a platform—it is a system of accountability powered by Artificial Intelligence (AI), Machine Learning (ML), and Blockchain technology. We ensure that every project is measured accurately, verified independently, and recorded permanently.</p>
+                    </div>
+                </div>
+
+                <!-- What We Do -->
+                <div class="glass-surface-strong rounded-3xl p-8">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        What We Do
+                    </h2>
+                    <p class="text-white/85 leading-relaxed mb-8">Our platform acts as a complete ecosystem for carbon credit management:</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4 p-4 glass-surface rounded-lg border border-white/10">
+                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">🌱</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white mb-2">NGO & Community Project Submission</h3>
+                                <p class="text-white/70 text-sm">NGOs and local organizations upload their project data, including aerial images, field reports, and supporting documents. Our system automatically captures location details (latitude and longitude) for precise tracking.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 p-4 glass-surface rounded-lg border border-white/10">
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">🤖</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white mb-2">Scientific Validation Using AI/ML</h3>
+                                <p class="text-white/70 text-sm">Advanced ML algorithms analyze the data to estimate biomass, carbon sequestration, and CO₂ absorption. This reduces errors, ensures consistency, and provides scientific credibility to every project.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 p-4 glass-surface rounded-lg border border-white/10">
+                            <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">🔍</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white mb-2">Admin Review & Approval</h3>
+                                <p class="text-white/70 text-sm">Independent administrators review the project data and AI-generated results. Only after careful validation are carbon credits officially issued.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 p-4 glass-surface rounded-lg border border-white/10">
+                            <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">🔗</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white mb-2">Blockchain Registration</h3>
+                                <p class="text-white/70 text-sm">Approved projects and issued credits are stored on the Blockchain, creating a tamper-proof, transparent record that cannot be altered. This ensures that credits are authentic, traceable, and permanent.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 p-4 glass-surface rounded-lg border border-white/10">
+                            <div class="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="text-white font-bold">🌍</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-white mb-2">Corporate Credit Purchase</h3>
+                                <p class="text-white/70 text-sm">Companies committed to sustainability can purchase these verified credits. Every transaction is secure, transparent, and supports real climate impact projects.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mission & Vision -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass-surface-strong rounded-3xl p-6">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </div>
+                            Our Mission
+                        </h3>
+                        <p class="text-white/85 leading-relaxed">To empower local communities and NGOs, to deliver trust through technology, and to enable corporations to achieve Net Zero responsibly—all while accelerating global climate solutions.</p>
+                    </div>
+
+                    <div class="glass-surface-strong rounded-3xl p-6">
+                        <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mr-3">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </div>
+                            Our Vision
+                        </h3>
+                        <p class="text-white/85 leading-relaxed">We envision a world where every carbon credit is authentic and backed by science, every community project receives fair recognition, and carbon markets drive real, measurable progress toward a sustainable future. 🌱</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="space-y-6">
+                <!-- Leaderboards -->
+                <div class="glass-surface-strong rounded-3xl p-6">
+                    <h4 class="font-semibold mb-3 flex items-center text-white">
+                        <div class="w-6 h-6 bg-gradient-to-br from-sky-400 to-indigo-600 rounded-full flex items-center justify-center mr-2">
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        Top NGOs (by credits generated)
+                    </h4>
+                    {% if top_ngos %}
+                        <ol class="space-y-3 text-sm">
+                            {% for ngo in top_ngos %}
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center text-white font-medium text-xs">{{ forloop.counter }}</div>
+                                        <div>
+                                            <div class="font-medium text-sm text-white">{{ ngo.username }}</div>
+                                            <div class="text-white/60 text-xs truncate">{{ ngo.email|slice:":20" }}...</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-sm font-semibold text-sky-300">{{ ngo.credits }}</div>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p class="text-white/60 text-sm">No NGO data yet.</p>
+                    {% endif %}
+                </div>
+
+                <div class="glass-surface-strong rounded-3xl p-6">
+                    <h4 class="font-semibold mb-3 flex items-center text-white">
+                        <div class="w-6 h-6 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mr-2">
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                        Top Companies (by credits purchased)
+                    </h4>
+                    {% if top_companies %}
+                        <ol class="space-y-3 text-sm">
+                            {% for c in top_companies %}
+                                <li class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-medium text-xs">{{ forloop.counter }}</div>
+                                        <div>
+                                            <div class="font-medium text-sm text-white">{{ c.username }}</div>
+                                            <div class="text-white/60 text-xs truncate">{{ c.email|slice:":20" }}...</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-sm font-semibold text-green-300">{{ c.purchased }}</div>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p class="text-neutral-400 text-sm">No purchase data yet.</p>
+                    {% endif %}
+                </div>
+
+                <!-- Why Choose Us -->
+                <div class="glass-surface-strong rounded-3xl p-6">
+                    <h4 class="font-semibold mb-4 text-white">Why Choose BlueQuant?</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-start space-x-2">
+                            <span class="text-green-400 font-bold">✅</span>
+                            <span class="text-white/85">End-to-End Trust</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-green-400 font-bold">✅</span>
+                            <span class="text-white/85">Blockchain Security</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-green-400 font-bold">✅</span>
+                            <span class="text-white/85">Scientific Accuracy</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-green-400 font-bold">✅</span>
+                            <span class="text-white/85">Global Accessibility</span>
+                        </div>
+                        <div class="flex items-start space-x-2">
+                            <span class="text-green-400 font-bold">✅</span>
+                            <span class="text-white/85">Social & Environmental Impact</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Core Values -->
+        <div class="glass-surface-strong rounded-3xl p-8 mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 text-center">Our Core Values</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">Transparency</h3>
+                    <p class="text-white/70 text-sm">Every step is open, verifiable, and traceable</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">Innovation</h3>
+                    <p class="text-white/70 text-sm">AI, ML, and blockchain bring science and trust together</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.414-4.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">Integrity</h3>
+                    <p class="text-white/70 text-sm">Projects approved only after rigorous validation</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">Collaboration</h3>
+                    <p class="text-white/70 text-sm">Connecting local initiatives with global efforts</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white mb-2">Impact</h3>
+                    <p class="text-white/70 text-sm">Each credit represents real climate action</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Commitment & Call to Action -->
+        <div class="glass-surface-strong rounded-3xl p-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-6">Our Commitment</h2>
+            <p class="text-lg text-white/85 leading-relaxed mb-8 max-w-4xl mx-auto">
+                At BlueQuant, we know that climate change is the biggest challenge of our time. But we also believe it is an opportunity for collective action. By combining local efforts with global support, and innovation with accountability, we are building a system where carbon credits are not just numbers on paper—they are symbols of real impact.
+            </p>
+            
+            <div class="grid md:grid-cols-4 gap-6 mb-8 font-javanese">
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🌳</div>
+                    <p class="font-semibold text-white text-lg">Trees planted</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">👨‍👩‍👧‍👦</div>
+                    <p class="font-semibold text-white text-lg">Communities empowered</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">💨</div>
+                    <p class="font-semibold text-white text-lg">CO₂ removed</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🌍</div>
+                    <p class="font-semibold text-white text-lg">Carbon-neutral world</p>
+                </div>
+            </div>
+
+            <div class="glass-surface rounded-lg p-6 border border-white/20">
+                <h3 class="text-2xl font-bold text-white mb-4">Join Us</h3>
+                <p class="text-white/85 leading-relaxed mb-6">
+                    Together, we can make carbon markets credible, inclusive, and impactful. Whether you are an NGO, a community, or a corporation—BlueQuant gives you the tools to create, verify, and support real climate action.
+                </p>
+                <p class="text-lg font-medium text-sky-300">
+                    👉 Because in the end, every credit counts, every action matters, and every step builds trust. 🌱✨
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
